@@ -2,8 +2,10 @@ import axios from 'axios';
 import { FormEvent, ChangeEvent, useState } from 'react';
 import Swal from 'sweetalert2';
 
-
-const AddEmployee = () => {
+interface AddEmployeeInterface {
+    addEmp: () => void;
+}
+const AddEmployee : React.FC<AddEmployeeInterface> = ({ addEmp }) => {
     const [inputs, setInputs] = useState({});
 
     const handleSubmit = (ev: FormEvent) => {
@@ -15,7 +17,9 @@ const AddEmployee = () => {
                     title: 'Success!',
                     text: message,
                     icon: 'success'
-                });
+                }).then(() => {
+                    addEmp((curr: boolean) => !curr);
+                })
             } else {
                 Swal.fire({
                     title: 'Error!',

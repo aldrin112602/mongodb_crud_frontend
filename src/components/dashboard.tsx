@@ -14,16 +14,25 @@ interface EmployeeProps {
 
 const Dashboard = () => {
   const [data, setData] = useState({ employees: [] });
+  const [state, setState] = useState<boolean>(false);
+
+
+  const addEmp = (callback: (current: boolean) => boolean) => {
+    setState(callback);
+  };
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/getEmployees')
       .then(({ data: responseData }) => {
         setData(responseData);
       })
+      .then(() => {
+        console.log('Rendered...')
+      })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [state]);
 
   return (
     <div className="p-4 container mx-auto bg-white shadow rounded mt-4" style={{ minHeight: '80vh' }}>
@@ -43,13 +52,13 @@ const Dashboard = () => {
         </thead>
         <tbody>
           {
-            data && data.employees.map((employee: EmployeeProps)  => <DisplayEmployee employee={employee}/>)
+            data && data.employees.map((employee: EmployeeProps) => <DisplayEmployee key={employee._id} employee={employee} />)
           }
         </tbody>
       </table>
 
       {/* add employee modal */}
-      <AddEmployee />
+      <AddEmployee addEmp={addEmp} />
     </div>
   );
 };
