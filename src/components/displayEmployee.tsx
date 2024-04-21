@@ -25,7 +25,7 @@ const DisplayEmployee = (props: propsInterface) => {
             <td>{employee.position}</td>
             <td>{employee.salary}</td>
             <td>
-                <button className="btn btn-sm btn-primary">Edit</button>
+                <button className="btn btn-sm btn-primary mx-1">Edit</button>
                 <button className="btn btn-sm btn-danger">Delete</button>
             </td>
         </tr>

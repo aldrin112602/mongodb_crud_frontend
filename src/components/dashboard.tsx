@@ -13,7 +13,7 @@ interface EmployeeProps {
 }
 
 const Dashboard = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ employees: [] });
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/getEmployees')
