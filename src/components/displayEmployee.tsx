@@ -1,6 +1,6 @@
 
 
-interface DataResponse {
+interface EmployeeProps {
     _id: string;
     name: string;
     gender: string;
@@ -11,7 +11,7 @@ interface DataResponse {
 
 
 interface propsInterface {
-    employee: DataResponse
+    employee: EmployeeProps
 }
 
 
