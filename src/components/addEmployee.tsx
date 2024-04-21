@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { FormEvent, ChangeEvent, useState } from 'react';
 import Swal from 'sweetalert2';
-
-interface AddEmployeeInterface {
-    addEmp: () => void;
+interface PropsInterface {
+    addEmp: (clbk: (param: boolean) => boolean) => void;
 }
-const AddEmployee : React.FC<AddEmployeeInterface> = ({ addEmp }) => {
+
+const AddEmployee = (props: PropsInterface) => {
     const [inputs, setInputs] = useState({});
 
     const handleSubmit = (ev: FormEvent) => {
@@ -18,8 +18,8 @@ const AddEmployee : React.FC<AddEmployeeInterface> = ({ addEmp }) => {
                     text: message,
                     icon: 'success'
                 }).then(() => {
-                    addEmp((curr: boolean) => !curr);
-                })
+                    props.addEmp((curr: boolean) => !curr);
+                });
             } else {
                 Swal.fire({
                     title: 'Error!',
@@ -75,7 +75,7 @@ const AddEmployee : React.FC<AddEmployeeInterface> = ({ addEmp }) => {
                             <label htmlFor="gender" className="form-label py-0 my-0">Gender</label>
                             <select onChange={handleSelectChange} required name="gender" id="gender" className="form-select">
                                 <option value="Male">Male</option>
-                                
+
                                 <option value="Female">Female</option>
                             </select>
                         </div>

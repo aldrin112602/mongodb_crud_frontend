@@ -14,12 +14,7 @@ interface EmployeeProps {
 
 const Dashboard = () => {
   const [data, setData] = useState({ employees: [] });
-  const [state, setState] = useState<boolean>(false);
-
-
-  const addEmp = (callback: (current: boolean) => boolean) => {
-    setState(callback);
-  };
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/getEmployees')
@@ -58,7 +53,7 @@ const Dashboard = () => {
       </table>
 
       {/* add employee modal */}
-      <AddEmployee addEmp={addEmp} />
+      <AddEmployee addEmp={setState} />
     </div>
   );
 };
