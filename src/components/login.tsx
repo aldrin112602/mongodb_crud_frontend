@@ -16,7 +16,7 @@ const Login = () => {
                     text: message,
                     icon: 'success'
                 }).then(()=> {
-                    window.location.href = './dashboard'
+                    window.location.href = '/dashboard'
                 });
 
                 const { user } = res.data;

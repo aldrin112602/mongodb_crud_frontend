@@ -1,6 +1,6 @@
 import Navbar from "./components/navbar"
 import Login from "./components/login"
-// import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard";
 import Home from "./components/home";
 import Contact from "./components/contact";
 import Nopage from "./components/nopage";
@@ -14,17 +14,33 @@ const App = () => {
 
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navbar isAuthenticated={isAuthenticated}/>}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="*" element={<Nopage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar isAuthenticated={isAuthenticated} />}>
+            {
+              isAuthenticated &&
+              (
+                <>
+                  <Route index element={<Dashboard />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                </>
+              )
+            }
+            {
+              !isAuthenticated &&
+              (
+                <>
+                  <Route index element={<Home />} />
+                  <Route path="contact" element={<Contact />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="signup" element={<Signup />} />
+                </>
+              )
+            }
+            <Route path="*" element={<Nopage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

@@ -14,20 +14,21 @@ const Navbar: React.FC<NavBarInterfase> = (props) => {
                     </button>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul className="navbar-nav mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/contact">Contact</Link>
-                            </li>
 
                             {
                                 props.isAuthenticated ?
                                     <li className="nav-item">
-                                        <Logout btnClass="btn btn-dark" btnText="Logout" redirect="/home" />
+                                        <Logout btnClass="btn btn-dark" btnText="Logout" redirect="/login" />
                                     </li>
                                     :
                                     <>
+
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/">Home</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" to="/contact">Contact</Link>
+                                        </li>
                                         <li className="nav-item">
                                             <Link className="nav-link" to="/login">Login</Link>
                                         </li>
